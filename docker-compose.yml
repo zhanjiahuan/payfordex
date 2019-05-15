@@ -1,0 +1,20 @@
+service:
+  build: .
+  container_name: pay_dex
+  ports:
+   - "9002:58482"
+  environment:
+   - FLASK_ENV=DEVELOPMENT
+   - SERVICE_NAME=PAY_DEX
+   - SERVICE_CHECK_HTTP=/v1/api/paydexchain/health_check
+   - SERVICE_CHECK_INTERVAL=5s
+   - SERVICE_TAGS=urlprefix-/v1/api/paydexchain/
+   - CONFIG_REDIS_PWD=G%E5qk1T
+   - CONFIG_REDIS_IPPORT=101.132.188.48:6479
+   - CONFIG_NETWORK_PASSPHRASE=xfin_core_network_v1.0.0 ; September 2018
+   - CONFIG_CONSUL_TOKEN=
+  volumes:
+   - "/home/xfin/pay_dex/logs/pyservice_log:/logs/pyservice_log"
+   - "/home/xfin/pay_dex/logs/segmentation_log_test:/logs/segmentation_log_test"
+  external_links:
+   - xconsul
